@@ -18,13 +18,6 @@ namespace Grupp7_TjuvOchPolis
             Name = name;
             Position = position;
             Direction = direction;
-        }
-
-
-        public void Move() //Move Person. call function in canvas
-        {
-            //Can move?
-        }
-
+        }      
     }
 }
