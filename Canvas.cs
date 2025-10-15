@@ -9,16 +9,17 @@ namespace Grupp7_TjuvOchPolis
     internal class Canvas
     {
         public Person[,] Matrix { get; set; }//tempnamn //varje index har person, if index null print " "
-        
         private int Height;
         private int Width;
-        //lista med personer
+        public List<Person> People { get; set; }
 
-        public Canvas(int width = 100, int height = 100) 
+        public Canvas(int width, int height, List<Person> people)
         {
             Height = height;
             Width = width;
             Matrix = new Person[Height, Width];
+            People = people;
+            RandomPos(); 
         }
 
         public void Update()
@@ -30,29 +31,44 @@ namespace Grupp7_TjuvOchPolis
             //spara person pos, om pos true, placera person tecken?
             //Person.Pos
             //
-        }    
+        }
 
         public void Print()
         {
 
             Console.WriteLine($"╔{new string('═', Width)}╗"); //new string('<whatChar>', <howMany>) 
-            for (int row = 0; row < Height; row++) 
+            for (int row = 0; row < Height; row++)
             {
                 Console.Write("║");
-                for (int col = 0; col < Width; col++) 
-                {      
+                for (int col = 0; col < Width; col++)
+                {
                     if (Matrix[row, col] == null)
-                    Console.Write(" "); 
+                        Console.Write(" ");
                     else
                     {
                         //Console.Write(Matrix[row, col].Char);
                     }
                 }
-                Console.Write("║"); 
-                Console.WriteLine();               
+                Console.Write("║");
+                Console.WriteLine();
             }
             Console.WriteLine($"╚{new string('═', Width)}╝");
         }
+        public void RandomPos() // Sätter en random position inom Canvas width och height för varje person
+        {
+            foreach (Person person in People)
+            {
+                int positionX = Random.Shared.Next(0, Width);
+                int positionY = Random.Shared.Next(0, Height);
+                int[] position = new int[2];
+
+                position[0] = positionX;
+                position[1] = positionY;
+                person.Position = position;
+                Console.WriteLine($"Person:{person.Name} X:{person.Position[0]} Y:{person.Position[1]}");
+            }
+        }
+
 
     }
 }

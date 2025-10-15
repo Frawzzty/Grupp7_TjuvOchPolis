@@ -4,9 +4,15 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            Canvas testcanvas = new Canvas(20,10);
-            testcanvas.Print();
+            Console.Clear();
+
+            List<Person> people = new List<Person>();
+            people = Person.CreatePerson(20);
+
+
+            Canvas city = new Canvas(20, 10, people);
+            city.Print();
         }
+
     }
 }
