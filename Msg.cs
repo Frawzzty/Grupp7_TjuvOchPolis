@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Grupp7_TjuvOchPolis
 {
-    public static class Msg //static class so you don't have to make a new object to add messages to every time
+    public static class Msg //static class so you don't have to make a new object to add messages to
     {
 
         private static List<string> messages = new List<string>(); //a list to contain messages
 
-        public static void Add(string msg) //this adds message to string
+        public static void Add(string msg) //this adds message to List
         {
             messages.Add(msg);
         }
@@ -20,17 +20,17 @@ namespace Grupp7_TjuvOchPolis
             foreach (string m in messages) Console.WriteLine(m);       
         }
 
-        public static void PrintLast()
+        public static void PrintLast() //prints last message in List
         {
             Console.WriteLine(messages[messages.Count -1]);
         }
 
-        public static void Clear() //this is if you'd like to clear everything from list before printing
+        public static void Clear() //clears list
         {         
             messages.Clear();
         }
 
-        ///This class would essentially act as a storage for messages and only print it's content when the Print() method is called upon 
+        ///This class would essentially act as a storage for messages and only prints it's content when the Print() method is called upon 
         ///so you can continually add debug messages throughout the code but still control the time when it outputs
         ///so you write Msg.Add("a debug message")
     }
