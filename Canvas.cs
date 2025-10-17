@@ -8,7 +8,7 @@ namespace Grupp7_TjuvOchPolis
 {
     internal class Canvas
     {
-        public Person[,] Matrix { get; set; }//tempnamn //varje index har person, if index null print " "
+        //public Person[,] Matrix { get; set; }//tempnamn //varje index har person, if index null print " "
         private int Height;
         private int Width;
         public List<Person> People { get; set; }
@@ -16,24 +16,11 @@ namespace Grupp7_TjuvOchPolis
         public Canvas(int width, int height, List<Person> people)
         {
             Height = height;
-            Width = width;
-            Matrix = new Person[Height, Width];
+            Width = width;         
             People = people;
             RandomPos(); 
         }
-
-        public void Update()
-        {
-            //börja bygga uppdate här 
-            //move person?
-            //foreach person something something
-            //collision check = kolla om har samma possition värde 
-            //spara person pos, om pos true, placera person tecken?
-            //Person.Pos
-            //
-        }
-
-        public void Print()
+        public void PrintBoarder()
         {
 
             Console.WriteLine($"╔{new string('═', Width)}╗"); //new string('<whatChar>', <howMany>) 
@@ -41,13 +28,8 @@ namespace Grupp7_TjuvOchPolis
             {
                 Console.Write("║");
                 for (int col = 0; col < Width; col++)
-                {
-                    if (Matrix[row, col] == null)
-                        Console.Write(" ");
-                    else
-                    {
-                        //Console.Write(Matrix[row, col].Char);
-                    }
+                {                   
+                    Console.Write(" ");                  
                 }
                 Console.Write("║");
                 Console.WriteLine();
@@ -64,11 +46,31 @@ namespace Grupp7_TjuvOchPolis
 
                 position[0] = positionX;
                 position[1] = positionY;
-                person.Position = position;
-                Console.WriteLine($"Person:{person.Name} X:{person.Position[0]} Y:{person.Position[1]}");
+                person.Position = position;             
             }
         }
-
+        public void PrintSimulation()
+        {
+            PrintBoarder();
+            PrintPeople();
+            Console.SetCursorPosition(0, Height+2); //math to put cursor after          
+        }
+        public void PrintPeople()
+        {
+            foreach (Person person in People)
+            {
+                Console.SetCursorPosition(person.Position[0], person.Position[1]); //x y          
+                Console.Write(person.Symbol);
+                person.Status();
+            }
+        }
+        public void UpdatePeoplePosition()
+        {
+            foreach (Person person in People)
+            {
+                person.Move();
+            }
+        }
 
     }
 }

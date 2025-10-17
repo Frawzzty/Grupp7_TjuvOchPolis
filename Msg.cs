@@ -30,7 +30,7 @@ namespace Grupp7_TjuvOchPolis
             messages.Clear();
         }
 
-        ///This class would essentially act as a storage for messages and only prints it's content when the Print() method is called upon 
+        ///This class would essentially act as a storage for messages and only prints it's content when the PrintBoarder() method is called upon 
         ///so you can continually add debug messages throughout the code but still control the time when it outputs
         ///so you write Msg.Add("a debug message")
     }
