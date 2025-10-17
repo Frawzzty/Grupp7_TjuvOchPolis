@@ -40,8 +40,8 @@ namespace Grupp7_TjuvOchPolis
         {
             foreach (Person person in People)
             {
-                int positionX = Random.Shared.Next(0, Width);
-                int positionY = Random.Shared.Next(0, Height);
+                int positionX = Random.Shared.Next(1, Width + 1);   // +1 because of map border
+                int positionY = Random.Shared.Next(1, Height + 1);  // +1 because of map border
                 int[] position = new int[2];
 
                 position[0] = positionX;
@@ -61,14 +61,14 @@ namespace Grupp7_TjuvOchPolis
             {
                 Console.SetCursorPosition(person.Position[0], person.Position[1]); //x y          
                 Console.Write(person.Symbol);
-                person.Status();
+                person.AddStatus();
             }
         }
         public void UpdatePeoplePosition()
         {
             foreach (Person person in People)
             {
-                person.Move();
+                person.Move(Width, Height);
             }
         }
 

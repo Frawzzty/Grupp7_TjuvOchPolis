@@ -3,19 +3,26 @@
     internal class Program
     {
         static void Main(string[] args)
-        {         
+        {
+            Console.CursorVisible = false;
             List<Person> people = new List<Person>();
-            people = Person.CreatePerson(2);
+            people = Person.CreatePerson(10, 5, 5);
 
-
-            Canvas city = new Canvas(20, 10, people);
+            Canvas city = new Canvas(40, 20, people);
             city.PrintSimulation();
+            Msg.Clear(); //Clear för så den inte skriver dubbelt
+
+
             while (true)
             {
-                Console.ReadKey();
                 Console.Clear();
+                
                 city.UpdatePeoplePosition();
-                city.PrintSimulation();               
+                city.PrintSimulation();
+
+                //Msg.Print();
+                Msg.Clear();
+                Console.ReadKey();
             }
         }
 
