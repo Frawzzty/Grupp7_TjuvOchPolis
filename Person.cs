@@ -11,15 +11,18 @@ namespace Grupp7_TjuvOchPolis
         public string Name { get; set; }
         public int[] Position { get; set; }//[x,y]
         public int[] Direction { get; set; } //X -1, Y 0
-        //public List<Item> Inventroy { get; set; } //Skapa Item klass
+        public List<Item> Inventory { get; set; }
         public string Symbol { get; set; }
+        public ConsoleColor Color{ get; set; }
 
-        public Person(string name)
+        public Person()
         {
-            Name = name;
+            Name = RandomName();
             Position = [0,0];
             Direction = RandomDirection();
+            Inventory = new List<Item>();
             Symbol = "X";
+            Color = ConsoleColor.White;
         }
         public static int[] RandomDirection()//bug: person kan få 0,0 direction vilket gör att dom står stilla
         {
@@ -43,31 +46,22 @@ namespace Grupp7_TjuvOchPolis
         }
         public static List<Person> CreatePerson(int citizenCount, int policeCount, int theifCount)
         {
-            string[] names = new string[]
-            {
-                "Anna", "Erik", "Maria", "Johan", "Sara", "Anders", "Emma", "Lars", "Linda", "Per",
-                "Elin", "Karl", "Sofie", "Fredrik", "Ida", "Magnus", "Camilla", "Daniel", "Jessica", "Oskar",
-                "Malin", "Henrik", "Josefin", "Niklas", "Caroline", "Mattias", "Rebecca", "Patrik", "Helena", "Thomas"
-            };
-
+           
             List<Person> people= new List<Person>();
-            //Citiezens
+            //Citiezensn
             for (int i = 0; i < citizenCount; i++)
             {
-                string randomName = names[Random.Shared.Next(0, names.Length)];
-                people.Add(new Citizen(randomName));
+                people.Add(new Citizen());
             }
             //Police
             for (int i = 0; i < policeCount; i++)
             {
-                string randomName = names[Random.Shared.Next(0, names.Length)];
-                people.Add(new Person(randomName));
+                people.Add(new Police());
             }
-            //Theives
+            //Thieves
             for (int i = 0; i < theifCount; i++)
             {
-                string randomName = names[Random.Shared.Next(0, names.Length)];
-                people.Add(new Person(randomName));
+                people.Add(new Thief());
             }
             return people;
         }
@@ -103,6 +97,16 @@ namespace Grupp7_TjuvOchPolis
                 Position[1] += height;
                 //Msg.Add("--> Tak");
             }
+        }
+        public static string RandomName()
+        {
+            string[] names = new string[]
+            {
+                "Anna", "Erik", "Maria", "Johan", "Sara", "Anders", "Emma", "Lars", "Linda", "Per",
+                "Elin", "Karl", "Sofie", "Fredrik", "Ida", "Magnus", "Camilla", "Daniel", "Jessica", "Oskar",
+                "Malin", "Henrik", "Josefin", "Niklas", "Caroline", "Mattias", "Rebecca", "Patrik", "Helena", "Thomas"
+            };
+            return names[Random.Shared.Next(0, names.Length)];
         }
     }
 }

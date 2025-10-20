@@ -60,7 +60,9 @@ namespace Grupp7_TjuvOchPolis
             foreach (Person person in People)
             {
                 Console.SetCursorPosition(person.Position[0], person.Position[1]); //x y          
+                Console.ForegroundColor = person.Color;
                 Console.Write(person.Symbol);
+                Console.ResetColor();
                 person.AddStatus();
             }
         }

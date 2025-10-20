@@ -8,9 +8,18 @@ namespace Grupp7_TjuvOchPolis
 {
     internal class Citizen : Person
     {
-        public Citizen(string name) : base (name)
+        public Citizen() : base()
         {
             Symbol = "M";
+            SetInventory();
+        }
+        public void SetInventory()
+        {
+            string[] defaultItems = ["Klocka", "Mobiltelefon", "Pengar", "Nycklar"]; 
+            foreach (string itemType in defaultItems)
+            {
+                Inventory.Add(new Item(itemType));
+            }
         }
     }
 }
