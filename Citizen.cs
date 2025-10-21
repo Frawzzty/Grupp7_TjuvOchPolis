@@ -10,7 +10,7 @@ namespace Grupp7_TjuvOchPolis
     {
         public Citizen() : base()
         {
-            Symbol = "M";
+            Symbol = "C";
             SetInventory();
         }
         public void SetInventory()
