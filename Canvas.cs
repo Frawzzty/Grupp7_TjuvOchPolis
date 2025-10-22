@@ -21,9 +21,19 @@ namespace Grupp7_TjuvOchPolis
             People = people;
             SetRandomPosition(); 
         }
-        public void HandleCollssion() //Keep?
+        public void HandleCollssion(Person thisPerson, Person otherPerson) //Keep?
         {
+            Msg.Add($"Collission Detected X:{thisPerson.PosX} Y:{thisPerson.PosY} - {thisPerson.GetType().Name} {thisPerson.Name} vs {otherPerson.GetType().Name} {otherPerson.Name}");
 
+            if(thisPerson.GetType().Name == "Theif" && otherPerson.GetType().Name == "Citizen" || otherPerson.GetType().Name == "Citizen" && this.GetType().Name == "Theif") //Tjuv kliver på citizen
+            {
+
+            }
+
+            if (thisPerson.GetType().Name == "Police" && otherPerson.GetType().Name == "Theif" || otherPerson.GetType().Name == "Theif" && this.GetType().Name == "Police") //Polis kliver på tjuv
+            {
+
+            }
         }
         private void ClearMap()
         {
@@ -43,16 +53,17 @@ namespace Grupp7_TjuvOchPolis
             UpdatePeoplePosition();
             ClearMap(); //Array.Clear(Map);
 
-            foreach (Person person in People) 
+            foreach (Person thisPerson in People) 
             {
-                int x = person.Position[0];
-                int y = person.Position[1];
+                int x = thisPerson.PosX;
+                int y = thisPerson.PosY;
                 if(Map[y, x] != null) // Collision detected //Bug när fler kliver på varandra? Skippar en check
                 {
-                    Person other = Map[y, x];
-                    Msg.Add($"Collission Detected: {person.GetType().Name} {person.Name} vs {other.GetType().Name} {other.Name}");
+                    Person otherPerson = Map[y, x]; //Person som redan står på rutan
+                    HandleCollssion(thisPerson, otherPerson);
                 }
-                Map[y, x] = person;
+
+                Map[y, x] = thisPerson;
             }
         }
         /// <summary>
@@ -86,13 +97,8 @@ namespace Grupp7_TjuvOchPolis
         {
             foreach (Person person in People)
             {
-                int positionX = Random.Shared.Next(1, Width - 1);   // +1 because of index in Map from Canvas
-                int positionY = Random.Shared.Next(1, Height - 1);  // +1 because of index in Map from Canvas
-                int[] position = new int[2];
-
-                position[0] = positionX;
-                position[1] = positionY;
-                person.Position = position;             
+                person.PosX = Random.Shared.Next(1, Width - 1);     // -1 because of index in Map from Canvas
+                person.PosY = Random.Shared.Next(1, Height - 1);    // -1 because of index in Map from Canvas
             }
         }
 
@@ -103,6 +109,5 @@ namespace Grupp7_TjuvOchPolis
                 person.Move(Width, Height);
             }
         }
-
     }
 }

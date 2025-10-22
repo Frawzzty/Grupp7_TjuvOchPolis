@@ -9,8 +9,12 @@ namespace Grupp7_TjuvOchPolis
     internal class Person
     {     
         public string Name { get; set; }
-        public int[] Position { get; set; }//[x,y]
-        public int[] Direction { get; set; } //X -1, Y 0
+
+        public int PosX { get; set; }//[x,y]
+        public int PosY { get; set; }//[x,y]
+        public int DirX { get; set; } //X -1, Y 0
+        public int DirY { get; set; } //X -1, Y 0
+
         public List<Item> Inventory { get; set; }
         public string Symbol { get; set; }
         public ConsoleColor Color{ get; set; }
@@ -18,35 +22,35 @@ namespace Grupp7_TjuvOchPolis
         public Person()
         {
             Name = RandomName();
-            Position = [0,0];
-            Direction = RandomDirection();
+            PosX = 0;
+            PosY = 0;
+            DirX = RandomDirection();
+            DirY = RandomDirection();
+
+            while (DirX == 0 && DirY == 0) // ReRoll if both
+            {
+                ReRollDirection();
+            }
+
             Inventory = new List<Item>();
             Symbol = "X";
             Color = ConsoleColor.White;
         }
-        public static int[] RandomDirection()
+        private static int RandomDirection()
         {
-            int directionX = Random.Shared.Next(-1, 2);
-            int directionY = Random.Shared.Next(-1, 2);
-
-            while (directionX == 0 && directionY == 0) // Reroll direction if both x and y is 0
-            {
-                directionX = Random.Shared.Next(-1, 2);
-                directionY = Random.Shared.Next(-1, 2);
-                //Msg.Add("Rerolled Direction");
-            }
-            int[] direction = {directionX, directionY };
+            int direction = Random.Shared.Next(-1, 2);
             return direction;
+        }
+
+        private void ReRollDirection()
+        {
+                DirX = RandomDirection();
+                DirY = RandomDirection();
         }
         public static List<Person> CreatePerson(int citizenCount, int policeCount, int theifCount)
         {
            
             List<Person> people= new List<Person>();
-            //Police
-            for (int i = 0; i < policeCount; i++)
-            {
-                people.Add(new Police());
-            }
             //Citizen
             for (int i = 0; i < citizenCount; i++) 
             {
@@ -57,6 +61,11 @@ namespace Grupp7_TjuvOchPolis
             {
                 people.Add(new Thief());
             }
+            //Police
+            for (int i = 0; i < policeCount; i++)
+            {
+                people.Add(new Police());
+            }
 
             return people;
         }
@@ -64,12 +73,12 @@ namespace Grupp7_TjuvOchPolis
         public void Move(int width, int height)
         {
             // Update position
-            Position[0] += Direction[0];
-            Position[1] += Direction[1];
+            PosX += DirX;
+            PosY += DirY;
 
             // Wrap X and Y using modulo
-            Position[0] = (Position[0] + width) % width;
-            Position[1] = (Position[1] + height) % height;
+            PosX = (PosX + width) % width;
+            PosY = (PosY + height) % height;
         }
         private static string RandomName()
         {

@@ -21,7 +21,7 @@
                 city.PrintMap();
 
                 Msg.Print();
-                Msg.Clear();
+                //Msg.Clear();
                 Console.ReadKey(true);
             }
         }
