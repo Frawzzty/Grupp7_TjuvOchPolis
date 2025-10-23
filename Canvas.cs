@@ -21,16 +21,19 @@ namespace Grupp7_TjuvOchPolis
             People = people;
             SetRandomPosition(); 
         }
-        public void HandleCollssion(Person thisPerson, Person otherPerson) //Keep?
+        public void HandleCollision(Person thisPerson, Person otherPerson) //Keep?
         {
-            Msg.Add($"Collission Detected X:{thisPerson.PosX} Y:{thisPerson.PosY} - {thisPerson.GetType().Name} {thisPerson.Name} vs {otherPerson.GetType().Name} {otherPerson.Name}");
+            Msg.Add($"Collision Detected X:{thisPerson.PosX} Y:{thisPerson.PosY} - {thisPerson.GetType().Name} {thisPerson.Name} vs {otherPerson.GetType().Name} {otherPerson.Name}");
 
-            if(thisPerson.GetType().Name == "Theif" && otherPerson.GetType().Name == "Citizen" || otherPerson.GetType().Name == "Citizen" && this.GetType().Name == "Theif") //Tjuv kliver på citizen
+            if(thisPerson is Thief && otherPerson is Citizen || otherPerson is Citizen && thisPerson is Thief) //Tjuv kliver på citizen
             {
-
+                Person thief;
+                Person citizen;
+                thief = thisPerson is Thief ? thisPerson : otherPerson;
+                citizen = thisPerson is Thief ? otherPerson : thisPerson;
             }
 
-            if (thisPerson.GetType().Name == "Police" && otherPerson.GetType().Name == "Theif" || otherPerson.GetType().Name == "Theif" && this.GetType().Name == "Police") //Polis kliver på tjuv
+            if (thisPerson.GetType().Name == "Police" && otherPerson.GetType().Name == "Thief" || otherPerson.GetType().Name == "Thief" && this.GetType().Name == "Police") //Polis kliver på tjuv
             {
 
             }
@@ -60,7 +63,7 @@ namespace Grupp7_TjuvOchPolis
                 if(Map[y, x] != null) // Collision detected //Bug när fler kliver på varandra? Skippar en check
                 {
                     Person otherPerson = Map[y, x]; //Person som redan står på rutan
-                    HandleCollssion(thisPerson, otherPerson);
+                    HandleCollision(thisPerson, otherPerson);
                 }
 
                 Map[y, x] = thisPerson;

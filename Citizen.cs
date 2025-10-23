@@ -15,11 +15,12 @@ namespace Grupp7_TjuvOchPolis
         }
         public void SetInventory()
         {
-            string[] defaultItems = ["Klocka", "Mobiltelefon", "Pengar", "Nycklar"]; 
+            string[] defaultItems = ["Klocka", "Mobiltelefon", "Pengar", "Nycklar"];
             foreach (string itemType in defaultItems)
             {
                 Inventory.Add(new Item(itemType));
             }
+            
         }
     }
 }

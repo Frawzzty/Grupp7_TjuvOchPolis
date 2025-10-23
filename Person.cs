@@ -77,7 +77,7 @@ namespace Grupp7_TjuvOchPolis
             PosY += DirY;
 
             // Wrap X and Y using modulo
-            PosX = (PosX + width) % width;
+            PosX = (PosX + width) % width; // Kan vi inte bara lägga in "PosX = (PosX + DirX + width) % width" för att slippa Update Position?
             PosY = (PosY + height) % height;
         }
         private static string RandomName()
