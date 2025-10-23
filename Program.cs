@@ -22,7 +22,9 @@
 
                 Msg.Print();
                 //Msg.Clear();
-                Console.ReadKey(true);
+                
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                if (key.KeyChar == 'x') { Msg.Clear(); }
             }
         }
     }

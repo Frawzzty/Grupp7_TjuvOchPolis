@@ -21,21 +21,25 @@ namespace Grupp7_TjuvOchPolis
             People = people;
             SetRandomPosition(); 
         }
-        public void HandleCollision(Person thisPerson, Person otherPerson) //Keep?
+        public void HandleCollision(Person personA, Person personB) //Keep?
         {
-            Msg.Add($"Collision Detected X:{thisPerson.PosX} Y:{thisPerson.PosY} - {thisPerson.GetType().Name} {thisPerson.Name} vs {otherPerson.GetType().Name} {otherPerson.Name}");
+            Msg.Add($"Collision Detected X:{personA.PosX} Y:{personA.PosY} - {personA.GetType().Name} {personA.Name} vs {personB.GetType().Name} {personB.Name}");
 
-            if(thisPerson is Thief && otherPerson is Citizen || otherPerson is Citizen && thisPerson is Thief) //Tjuv kliver på citizen
+            if(personA is Thief && personB is Citizen || personB is Citizen && personA is Thief) //Tjuv kolliderar med citizen
             {
-                Person thief;
-                Person citizen;
-                thief = thisPerson is Thief ? thisPerson : otherPerson;
-                citizen = thisPerson is Thief ? otherPerson : thisPerson;
+                Thief thief = personA is Thief ? (Thief)personA : (Thief)personB;
+                Citizen citizen = personA is Thief ? (Citizen)personB : (Citizen)personA;
+
+                if(citizen.Inventory.Count > 0) 
+                    thief.StealItem(citizen);
             }
 
-            if (thisPerson.GetType().Name == "Police" && otherPerson.GetType().Name == "Thief" || otherPerson.GetType().Name == "Thief" && this.GetType().Name == "Police") //Polis kliver på tjuv
+            if (personA is Thief && personB is Police || personB is Police && personA is Thief) //Polis kolliderar med Tjuv 
             {
+                Thief thief = personA is Thief ? (Thief)personA : (Thief)personB;
+                Police police = personA is Thief ? (Police)personB : (Police)personA;
 
+                if (thief.IsWanted) police.Arrest(thief);
             }
         }
         private void ClearMap()
@@ -56,17 +60,17 @@ namespace Grupp7_TjuvOchPolis
             UpdatePeoplePosition();
             ClearMap(); //Array.Clear(Map);
 
-            foreach (Person thisPerson in People) 
+            foreach (Person personA in People) 
             {
-                int x = thisPerson.PosX;
-                int y = thisPerson.PosY;
+                int x = personA.PosX;
+                int y = personA.PosY;
                 if(Map[y, x] != null) // Collision detected //Bug när fler kliver på varandra? Skippar en check
                 {
-                    Person otherPerson = Map[y, x]; //Person som redan står på rutan
-                    HandleCollision(thisPerson, otherPerson);
+                    Person personB = Map[y, x]; //Person som redan står på rutan
+                    HandleCollision(personA, personB); //beröm till patrik för variable namn
                 }
 
-                Map[y, x] = thisPerson;
+                Map[y, x] = personA;
             }
         }
         /// <summary>

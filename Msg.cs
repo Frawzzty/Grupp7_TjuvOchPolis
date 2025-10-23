@@ -17,8 +17,7 @@ namespace Grupp7_TjuvOchPolis
         }
         public static void Print() //this prints the messages from List on their own lines
         {
-            foreach (string m in messages) Console.WriteLine(m);
-            
+            foreach (string m in messages) Console.WriteLine(m);          
         }
 
         public static void PrintLast() //prints last message in List
