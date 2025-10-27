@@ -80,6 +80,20 @@ namespace Grupp7_TjuvOchPolis
             PosX = (PosX + width) % width; // Kan vi inte bara lägga in "PosX = (PosX + DirX + width) % width" för att slippa Update Position?
             PosY = (PosY + height) % height;
         }
+
+        public virtual string Description()
+        {
+            string text = "";
+            text += this.GetType().Name.PadRight(8);
+            text += Name.PadRight(10);
+            text += $"X:{PosX} Y:{PosY}".PadRight(10);
+            text += $"dirX:{DirX} dirY:{DirY}".PadRight(16);
+            foreach (Item item in Inventory) 
+            {
+                text += item.Type + ", ";
+            }
+            return text;
+        }
         private static string RandomName()
         {
             string[] names =

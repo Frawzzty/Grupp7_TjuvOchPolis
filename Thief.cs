@@ -21,7 +21,7 @@ namespace Grupp7_TjuvOchPolis
             Item stolenItem = citizen.Inventory[rnd];//bug
             citizen.Inventory.RemoveAt(rnd);
             this.Inventory.Add(stolenItem);
-            IsWanted = true;
+            this.IsWanted = true;
             Msg.Add($"Thief {Name} stole {stolenItem.Type} from {citizen.Name}");
         }
 
@@ -34,6 +34,24 @@ namespace Grupp7_TjuvOchPolis
                 InPrison = false;
                 IsWanted = false;
             }
+        }
+
+        public override string Description()
+        {
+            string text = "";
+            text += this.GetType().Name.PadRight(8);
+            text += Name.PadRight(10);
+            text += $"X:{PosX} Y:{PosY}".PadRight(10);
+            text += $"dirX:{DirX} dirY:{DirY}".PadRight(16);
+            text += $"In Prison: {InPrison} ".PadLeft(16);
+            text += $"Is Wanted: {IsWanted} ".PadLeft(16);
+            foreach (Item item in Inventory)
+            {
+                text += item.Type + ", ";
+            }
+            
+
+            return text;
         }
     }
 }

@@ -25,12 +25,12 @@ namespace Grupp7_TjuvOchPolis
         {
             Msg.Add($"Collision Detected X:{personA.PosX} Y:{personA.PosY} - {personA.GetType().Name} {personA.Name} vs {personB.GetType().Name} {personB.Name}");
 
-            if(personA is Thief && personB is Citizen || personB is Citizen && personA is Thief) //Tjuv kolliderar med citizen
+            if (personA is Thief && personB is Citizen || personB is Citizen && personA is Thief) //Tjuv kolliderar med citizen
             {
                 Thief thief = personA is Thief ? (Thief)personA : (Thief)personB;
                 Citizen citizen = personA is Thief ? (Citizen)personB : (Citizen)personA;
 
-                if(citizen.Inventory.Count > 0) 
+                if (citizen.Inventory.Count > 0)
                     thief.StealItem(citizen);
             }
 
