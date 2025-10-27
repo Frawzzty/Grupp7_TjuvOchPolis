@@ -24,14 +24,7 @@ namespace Grupp7_TjuvOchPolis
             Name = RandomName();
             PosX = 0;
             PosY = 0;
-            DirX = RandomDirection();
-            DirY = RandomDirection();
-
-            while (DirX == 0 && DirY == 0) // ReRoll if both
-            {
-                ReRollDirection();
-            }
-
+            SetDirection();
             Inventory = new List<Item>();
             Symbol = "X";
             Color = ConsoleColor.White;
@@ -40,6 +33,17 @@ namespace Grupp7_TjuvOchPolis
         {
             int direction = Random.Shared.Next(-1, 2);
             return direction;
+        }
+
+        public void SetDirection()
+        {
+            DirX = RandomDirection();
+            DirY = RandomDirection();
+
+            while (DirX == 0 && DirY == 0) // ReRoll if both
+            {
+                ReRollDirection();
+            }
         }
 
         private void ReRollDirection()

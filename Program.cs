@@ -7,34 +7,47 @@
             Console.CursorVisible = false;
 
             List<Person> freePeople = new List<Person>();
-            freePeople = Person.CreatePerson(10, 5, 10);
-            Canvas city = new Canvas(40, 20, freePeople);
-            
-            Canvas prison = new Canvas(40, 20, freePeople);
+            List<Person> prisoners = new List<Person>();
+            freePeople = Person.CreatePerson(10, 10, 10);
 
+            Canvas city = new Canvas(40, 20, freePeople);           
+            Canvas prison = new Canvas(40, 10, prisoners);
 
+            int tick = 0;
 
             Msg.Clear(); //Clear för så den inte skriver dubbelt
 
             while (true)
-            {
+            {                
                 Console.Clear();
                 Console.Write("\u001bc\x1b[3J"); //Helps clearing things drawn outside of frame. Removes artifacts
 
                 city.UpdateMap();
-                city.PrintMap();
+                prison.UpdateMap();
+                city.PrintMap();              
+                prison.People = city.GetPrisoners();
+                prison.PrintMap();
+                
+                Msg.Print();
+                Msg.Clear();
 
-                //Msg.Print();
-                //Msg.Clear();
+                //foreach (Person person in freePeople)
+                //{
+                //    Console.WriteLine(person.Description());
+                //}
 
-                foreach (Person person in freePeople)
+                tick++;
+                if (tick == 5)
                 {
-                    Console.WriteLine(person.Description());
+                    tick = 0;
+                    foreach (Person person in freePeople)
+                    {
+                        person.SetDirection();
+                    }
                 }
-
-                //ConsoleKeyInfo key = Console.ReadKey(true);
-                //if (key.KeyChar == 'x') { Msg.Clear(); }
-                Thread.Sleep(200);
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                if (key.KeyChar == 'x') { Msg.Clear(); }
+                //Thread.Sleep(200);
         
             }
         }
