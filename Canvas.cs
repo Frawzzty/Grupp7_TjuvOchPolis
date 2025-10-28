@@ -8,10 +8,10 @@ namespace Grupp7_TjuvOchPolis
 {
     internal class Canvas
     {
-        public Person[,] Map { get; set; } //Alla
-        public int Height; //Alla
-        public int Width; //Alla
-        public List<Person> People { get; set; } //Alla
+        public Person[,] Map { get; set; }
+        public int Height;
+        public int Width; 
+        public List<Person> People { get; set; }
 
         public Canvas(int width, int height, List<Person> people)
         {
@@ -21,28 +21,6 @@ namespace Grupp7_TjuvOchPolis
             People = people;
             SetRandomPosition(); 
         }
-        public void HandleCollision(Person personA, Person personB) //Keep?
-        {
-            Msg.Add($"Collision Detected X:{personA.PosX} Y:{personA.PosY} - {personA.GetType().Name} {personA.Name} vs {personB.GetType().Name} {personB.Name}");
-
-            if (personA is Thief && personB is Citizen || personB is Thief && personA is Citizen) //Tjuv kolliderar med citizen
-            {
-                Thief thief = personA is Thief ? (Thief)personA : (Thief)personB;
-                Citizen citizen = personA is Thief ? (Citizen)personB : (Citizen)personA;
-
-                if (citizen.Inventory.Count > 0)
-                    thief.StealItem(citizen);
-            }
-
-            if (personA is Thief && personB is Police || personB is Thief && personA is Police) //Polis kolliderar med Tjuv 
-            {
-                Thief thief = personA is Thief ? (Thief)personA : (Thief)personB;
-                Police police = personA is Thief ? (Police)personB : (Police)personA;
-
-                if (thief.IsWanted) police.Arrest(thief);
-            }
-        }
-        
         public void ClearMap()
         {
             for (int row = 0; row < Height; row++) 
@@ -60,22 +38,21 @@ namespace Grupp7_TjuvOchPolis
         {
             UpdatePeoplePosition();
             ClearMap(); //Array.Clear(Map);
-            foreach (Person personA in People)
+            foreach (Person personA in People)//placerar ut personer i map matris
             {
                 int x = personA.PosX;
                 int y = personA.PosY;
 
-                Map[y, x] = personA;
-                //skulle kunna ha SetDirection() här
+                Map[y, x] = personA;         
             }
         
         }      
         /// <summary>
         /// Prints data in matrix.
         /// </summary>
-        public void PrintMap() //VIRUTAL OVERRIDE /PRISON & CITY
+        public void PrintMap() //VIRUTAL OVERRIDE / CITY
         {
-            Console.WriteLine($"╔{new string('═', Width)}╗"); //new string('<whatChar>', <howMany>) 
+            Console.WriteLine($"╔{new string('═', Width)}╗");
             for (int row = 0; row < Height; row++)
             {
                 Console.Write("║");
@@ -97,7 +74,7 @@ namespace Grupp7_TjuvOchPolis
             }
             Console.WriteLine($"╚{new string('═', Width)}╝");
         }
-        public void SetRandomPosition() // Sätter en random position inom Canvas width och height för varje person
+        public void SetRandomPosition() // sets random position
         {
             foreach (Person person in People)
             {

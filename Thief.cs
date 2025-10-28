@@ -45,6 +45,7 @@ namespace Grupp7_TjuvOchPolis
             text += $"dirX:{DirX} dirY:{DirY}".PadRight(16);
             text += $"In Prison: {InPrison} ".PadLeft(16);
             text += $"Is Wanted: {IsWanted} ".PadLeft(16);
+            text += $"TimeInPrison: {TimeInPrison} ".PadLeft(16);          
             foreach (Item item in Inventory)
             {
                 text += item.Type + ", ";

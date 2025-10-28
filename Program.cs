@@ -27,11 +27,12 @@
                 city.PrintMap();
                 city.SendPrisonersToPrison(prison);
                 prison.UpdatePrisonTime();
-                prison.SendFreePrisonersToCity(city);
                 prison.PrintMap();
+                prison.SendFreePrisonersToCity(city);
                 
-                Msg.Print();
-                Msg.Clear();
+                
+                Msg.PrintLast(10);
+                
 
                 foreach (Person person in freePeople)
                 {
@@ -39,6 +40,7 @@
                 }
 
                 Console.WriteLine("----------------------------------");
+                Console.WriteLine("FOlK I FÄNGELSE");
                 foreach (Person person in prisoners)
                 {
                     Console.WriteLine(person.Description());

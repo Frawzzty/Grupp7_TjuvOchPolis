@@ -16,19 +16,15 @@ namespace Grupp7_TjuvOchPolis
 
         public void SendFreePrisonersToCity(City city)
         {
-            for (int i = 0; i < People.Count() - 1; i++)
-            {
-                Console.WriteLine(((Thief)People[i]).InPrison);
-                Console.WriteLine(((Thief)People[i]).InPrison);
-                Console.WriteLine(((Thief)People[i]).InPrison);
-                Console.WriteLine(((Thief)People[i]).InPrison);
-                Console.WriteLine(((Thief)People[i]).InPrison);
-
+            for (int i = 0; i < People.Count(); i++)
+            {               
                 if (((Thief)People[i]).InPrison == false)
-                    {
-                        city.People.Add(People[i]);
-                        People.Remove(People[i]);
-                    }
+                {
+                    Msg.Add($"Freed {People[i].Name} from prison");
+               
+                    city.People.Add(People[i]);
+                    People.Remove(People[i]);
+                }
             }
         }
 

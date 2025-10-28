@@ -10,19 +10,33 @@ namespace Grupp7_TjuvOchPolis
     {
 
         private static List<string> messages = new List<string>(); //a list to contain messages
+                                                                   //can change from list to stack
 
         public static void Add(string msg) //this adds message to List
         {
             messages.Add(msg);
+            if (messages.Count > 25)
+            { 
+                messages.RemoveAt(0);
+            }
         }
         public static void Print() //this prints the messages from List on their own lines
         {
             foreach (string m in messages) Console.WriteLine(m);          
         }
 
-        public static void PrintLast() //prints last message in List
+        public static void PrintLast(int amount)
         {
-            Console.WriteLine(messages[messages.Count -1]);
+            if (messages.Count < amount)
+            {
+                amount = messages.Count;
+            }
+            Console.WriteLine("================================================");          
+            for (int i = amount; i > 0; i--)
+            {
+                Console.WriteLine(i + messages[messages.Count - i]);          
+            }
+            Console.WriteLine("================================================");       
         }
 
         public static void Clear() //clears list

@@ -34,8 +34,8 @@ namespace Grupp7_TjuvOchPolis
         }
 
         public void HandleCollision(Person personA, Person personB) //Keep?
-        {
-            Msg.Add($"Collision Detected X:{personA.PosX} Y:{personA.PosY} - {personA.GetType().Name} {personA.Name} vs {personB.GetType().Name} {personB.Name}");
+        {         
+            Msg.Add($"{personA.GetType().Name} {personA.Name} walked into {personB.GetType().Name} {personB.Name}");
 
             if (personA is Thief && personB is Citizen || personB is Thief && personA is Citizen) //Tjuv kolliderar med citizen
             {
