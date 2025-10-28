@@ -8,10 +8,10 @@ namespace Grupp7_TjuvOchPolis
 {
     internal class Canvas
     {
-        private Person[,] Map { get; set; }
-        private int Height;
-        private int Width;
-        public List<Person> People { get; set; }
+        public Person[,] Map { get; set; } //Alla
+        public int Height; //Alla
+        public int Width; //Alla
+        public List<Person> People { get; set; } //Alla
 
         public Canvas(int width, int height, List<Person> people)
         {
@@ -42,26 +42,8 @@ namespace Grupp7_TjuvOchPolis
                 if (thief.IsWanted) police.Arrest(thief);
             }
         }
-        public List<Person> GetPrisoners()
-        {
-            List<Person> prisoners = new List<Person>();
-            foreach (Person person in People)
-            {
-                if (person is Thief)
-                {                 
-                    if (((Thief)person).InPrison)//temp lösning
-                    {
-                        prisoners.Add(person);                  
-                    }                  
-                }
-            } 
-            foreach (Person prisoner in prisoners)
-            {
-                People.Remove(prisoner);
-            }
-            return prisoners;
-        }
-        private void ClearMap()
+        
+        public void ClearMap()
         {
             for (int row = 0; row < Height; row++) 
             {
@@ -74,29 +56,24 @@ namespace Grupp7_TjuvOchPolis
         /// <summary>
         /// Clears previous Data in matrix. Updares people positions. Checks collision. Place people in the matrix.
         /// </summary>
-        public void UpdateMap()
+        public virtual void UpdateMap()
         {
             UpdatePeoplePosition();
             ClearMap(); //Array.Clear(Map);
-
-            foreach (Person personA in People) 
+            foreach (Person personA in People)
             {
                 int x = personA.PosX;
                 int y = personA.PosY;
-                if(Map[y, x] != null) // Collision detected //Bug när fler kliver på varandra? Skippar en check
-                {
-                    Person personB = Map[y, x]; //Person som redan står på rutan
-                    HandleCollision(personA, personB); //beröm till patrik för variable namn
-                }
 
                 Map[y, x] = personA;
                 //skulle kunna ha SetDirection() här
             }
+        
         }      
         /// <summary>
         /// Prints data in matrix.
         /// </summary>
-        public void PrintMap() 
+        public void PrintMap() //VIRUTAL OVERRIDE /PRISON & CITY
         {
             Console.WriteLine($"╔{new string('═', Width)}╗"); //new string('<whatChar>', <howMany>) 
             for (int row = 0; row < Height; row++)

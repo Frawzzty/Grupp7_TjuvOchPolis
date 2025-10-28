@@ -28,7 +28,7 @@ namespace Grupp7_TjuvOchPolis
         public void SittingInPrison() //tempnamn
         {
             TimeInPrison++;
-            if (TimeInPrison > 20) 
+            if (TimeInPrison > 5) 
             { 
                 TimeInPrison = 0;
                 InPrison = false;

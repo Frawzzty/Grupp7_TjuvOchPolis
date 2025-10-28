@@ -10,8 +10,8 @@
             List<Person> prisoners = new List<Person>();
             freePeople = Person.CreatePerson(10, 10, 10);
 
-            Canvas city = new Canvas(40, 20, freePeople);           
-            Canvas prison = new Canvas(40, 10, prisoners);
+            City city = new City(40, 20, freePeople);           
+            Prison prison = new Prison(40, 10, prisoners);
 
             int tick = 0;
 
@@ -24,19 +24,28 @@
 
                 city.UpdateMap();
                 prison.UpdateMap();
-                city.PrintMap();              
-                prison.People = city.GetPrisoners();
+                city.PrintMap();
+                city.SendPrisonersToPrison(prison);
+                prison.UpdatePrisonTime();
+                prison.SendFreePrisonersToCity(city);
                 prison.PrintMap();
                 
                 Msg.Print();
                 Msg.Clear();
 
-                //foreach (Person person in freePeople)
-                //{
-                //    Console.WriteLine(person.Description());
-                //}
+                foreach (Person person in freePeople)
+                {
+                    Console.WriteLine(person.Description());
+                }
 
-                tick++;
+                Console.WriteLine("----------------------------------");
+                foreach (Person person in prisoners)
+                {
+                    Console.WriteLine(person.Description());
+                }
+
+
+                tick++; //Give new direction after five ticks
                 if (tick == 5)
                 {
                     tick = 0;
