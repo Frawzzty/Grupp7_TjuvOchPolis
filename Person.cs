@@ -87,7 +87,7 @@ namespace Grupp7_TjuvOchPolis
 
         public virtual string Description()
         {
-            string text = "";
+            string text = "";          
             text += this.GetType().Name.PadRight(8);
             text += Name.PadRight(10);
             text += $"X:{PosX} Y:{PosY}".PadRight(10);
@@ -98,6 +98,30 @@ namespace Grupp7_TjuvOchPolis
             }
             return text;
         }
+        public void PrintDetails()
+        {
+            Console.ForegroundColor = Color;
+            Console.Write(this.GetType().Name.PadRight(8));
+            Console.ResetColor();
+            Console.Write(Name.PadRight(10));         
+            Console.Write($"X:{PosX}".PadRight(5));
+            Console.Write($"Y:{PosY}".PadRight(5));
+
+            Console.Write($"dirX:{DirX}".PadRight(8) + $"dirY:{DirY}".PadRight(8));                      
+        }
+        public void PrintInventory() 
+        {
+            Console.Write("[");
+            for (int i = 0; i < Inventory.Count; i++)
+            { 
+                if (Inventory.Count == i +1)
+                    Console.Write(Inventory[i].Type);
+                else
+                    Console.Write(Inventory[i].Type + ", ");
+            }
+            Console.Write("]");
+        }
+        public virtual void PrintRoleDetails(){}
         private static string RandomName()
         {
             string[] names =

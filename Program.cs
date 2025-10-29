@@ -1,4 +1,6 @@
-﻿namespace Grupp7_TjuvOchPolis
+﻿using System.Drawing;
+
+namespace Grupp7_TjuvOchPolis
 {
     internal class Program
     {
@@ -12,7 +14,7 @@
 
             City city = new City(40, 20, freePeople);           
             Prison prison = new Prison(40, 10, prisoners);
-            bool debugMode = false;
+            bool debugMode = true;
             int tick = 0;
 
             Msg.Clear(); //Clear för så den inte skriver dubbelt
@@ -33,15 +35,23 @@
 
                     if (debugMode)
                     {
+                        Console.WriteLine("Profesion | Name | position | direcction | inventory |");
+
                         foreach (Person person in freePeople)
                         {
-                            Console.WriteLine(person.Description());
+                            person.PrintDetails();
+                            person.PrintRoleDetails();
+                            person.PrintInventory();
+                            Console.WriteLine();
                         }
                         Console.WriteLine("----------------------------------");
-                        Console.WriteLine("FOlK I FÄNGELSE");
+                        Console.WriteLine("PRISONERS IN PRISON:");
                         foreach (Person person in prisoners)
                         {
-                            Console.WriteLine(person.Description());
+                            person.PrintDetails();
+                            person.PrintRoleDetails();
+                            person.PrintInventory();
+                            Console.WriteLine();
                         }
                     }
                     else
@@ -50,25 +60,21 @@
                         prison.PrintMap();
                         Msg.PrintLast(10);
                     }
-                    Thread.Sleep(200);
+
+                    tick++; //Give new direction after five ticks
+                    if (tick == 5)
+                    {
+                        tick = 0;
+                        foreach (Person person in freePeople)
+                        {
+                            person.SetDirection();
+                        }
+                    }
+                    Thread.Sleep(500);
                 }
-                
-
-                  
-                //tick++; //Give new direction after five ticks
-                //if (tick == 5)
-                //{
-                //    tick = 0;
-                //    foreach (Person person in freePeople)
-                //    {
-                //        person.SetDirection();
-                //    }
-                //}
-
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 
-                if (key.KeyChar == 'd') { debugMode = !debugMode; }
-                
+                if (key.KeyChar == 'd') { debugMode = !debugMode; }              
             }
         }
     }
