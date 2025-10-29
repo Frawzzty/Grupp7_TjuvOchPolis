@@ -12,54 +12,63 @@
 
             City city = new City(40, 20, freePeople);           
             Prison prison = new Prison(40, 10, prisoners);
-
+            bool debugMode = false;
             int tick = 0;
 
             Msg.Clear(); //Clear för så den inte skriver dubbelt
 
             while (true)
             {                
-                Console.Clear();
-                Console.Write("\u001bc\x1b[3J"); //Helps clearing things drawn outside of frame. Removes artifacts
-
-                city.UpdateMap();
-                prison.UpdateMap();
-                city.PrintMap();
-                city.SendPrisonersToPrison(prison);
-                prison.UpdatePrisonTime();
-                prison.PrintMap();
-                prison.SendFreePrisonersToCity(city);
                 
-                
-                Msg.PrintLast(10);
-                
-
-                foreach (Person person in freePeople)
+                while (!Console.KeyAvailable)
                 {
-                    Console.WriteLine(person.Description());
-                }
+                    Console.Clear();
+                    Console.Write("\u001bc\x1b[3J"); //Helps clearing things drawn outside of frame. Removes artifacts 
 
-                Console.WriteLine("----------------------------------");
-                Console.WriteLine("FOlK I FÄNGELSE");
-                foreach (Person person in prisoners)
-                {
-                    Console.WriteLine(person.Description());
-                }
+                    city.UpdateMap();
+                    prison.UpdateMap();
+                    city.SendPrisonersToPrison(prison);
+                    prison.UpdatePrisonTime();
+                    prison.SendFreePrisonersToCity(city);
 
-
-                tick++; //Give new direction after five ticks
-                if (tick == 5)
-                {
-                    tick = 0;
-                    foreach (Person person in freePeople)
+                    if (debugMode)
                     {
-                        person.SetDirection();
+                        foreach (Person person in freePeople)
+                        {
+                            Console.WriteLine(person.Description());
+                        }
+                        Console.WriteLine("----------------------------------");
+                        Console.WriteLine("FOlK I FÄNGELSE");
+                        foreach (Person person in prisoners)
+                        {
+                            Console.WriteLine(person.Description());
+                        }
                     }
+                    else
+                    {
+                        city.PrintMap();
+                        prison.PrintMap();
+                        Msg.PrintLast(10);
+                    }
+                    Thread.Sleep(200);
                 }
+                
+
+                  
+                //tick++; //Give new direction after five ticks
+                //if (tick == 5)
+                //{
+                //    tick = 0;
+                //    foreach (Person person in freePeople)
+                //    {
+                //        person.SetDirection();
+                //    }
+                //}
+
                 ConsoleKeyInfo key = Console.ReadKey(true);
-                if (key.KeyChar == 'x') { Msg.Clear(); }
-                //Thread.Sleep(200);
-        
+                
+                if (key.KeyChar == 'd') { debugMode = !debugMode; }
+                
             }
         }
     }
