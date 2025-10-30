@@ -31,10 +31,10 @@ namespace Grupp7_TjuvOchPolis
             {
                 amount = messages.Count;
             }
-            Console.WriteLine("================================================");          
+            Console.WriteLine("== NEWS FEED ===================================");          
             for (int i = amount; i > 0; i--)
             {
-                Console.WriteLine(i + messages[messages.Count - i]);          
+                Console.WriteLine(messages[messages.Count - i]);          
             }
             Console.WriteLine("================================================");       
         }

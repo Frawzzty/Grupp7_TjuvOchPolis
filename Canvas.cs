@@ -36,6 +36,7 @@ namespace Grupp7_TjuvOchPolis
         /// </summary>
         public virtual void UpdateMap()
         {
+            UpdateDirection(10);
             UpdatePeoplePosition();
             ClearMap(); //Array.Clear(Map);
             foreach (Person personA in People)//placerar ut personer i map matris
@@ -50,9 +51,12 @@ namespace Grupp7_TjuvOchPolis
         /// <summary>
         /// Prints data in matrix.
         /// </summary>
-        public void PrintMap() //VIRUTAL OVERRIDE / CITY
+        public void PrintMap() //VIRTUAL OVERRIDE / CITY
         {
-            Console.WriteLine($"╔{new string('═', Width)}╗");
+            string place = GetType().Name.ToUpper();
+
+            // Console.WriteLine(GetType().Name);
+            Console.WriteLine($"╔══ {place} {new string('═', Width - place.Length - 4)}╗");
             for (int row = 0; row < Height; row++)
             {
                 Console.Write("║");
@@ -88,6 +92,20 @@ namespace Grupp7_TjuvOchPolis
             foreach (Person person in People)
             {
                 person.Move(Width, Height);
+            }
+        }
+
+        private int tick = 0;
+        public void UpdateDirection(int tickMax)
+        {
+            tick++; //Give new direction after five ticks
+            if (tick == tickMax)
+            {
+                tick = 0;
+                foreach (Person person in People)
+                {
+                    person.SetDirection();
+                }
             }
         }
     }

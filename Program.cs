@@ -12,9 +12,9 @@ namespace Grupp7_TjuvOchPolis
             List<Person> prisoners = new List<Person>();
             freePeople = Person.CreatePerson(10, 10, 10);
 
-            City city = new City(40, 20, freePeople);           
-            Prison prison = new Prison(40, 10, prisoners);
-            bool debugMode = true;
+            City city = new City(100, 25, freePeople);           
+            Prison prison = new Prison(50, 10, prisoners);
+            bool debugMode = false;
             int tick = 0;
 
             Msg.Clear(); //Clear för så den inte skriver dubbelt
@@ -59,19 +59,9 @@ namespace Grupp7_TjuvOchPolis
                     {
                         city.PrintMap();
                         prison.PrintMap();
-                        Msg.PrintLast(10);
+                        Msg.PrintLast(5);
                     }
-
-                    tick++; //Give new direction after five ticks
-                    if (tick == 5)
-                    {
-                        tick = 0;
-                        foreach (Person person in freePeople)
-                        {
-                            person.SetDirection();
-                        }
-                    }
-                    Thread.Sleep(500);
+                    Thread.Sleep(200);
                 }
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 
