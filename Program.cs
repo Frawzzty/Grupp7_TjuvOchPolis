@@ -10,7 +10,7 @@ namespace Grupp7_TjuvOchPolis
 
             List<Person> freePeople = new List<Person>();
             List<Person> prisoners = new List<Person>();
-            freePeople = Person.CreatePerson(10, 10, 10);
+            freePeople = Person.CreatePerson(30, 10, 20);
 
             City city = new City(100, 25, freePeople);           
             Prison prison = new Prison(50, 10, prisoners);
@@ -27,6 +27,7 @@ namespace Grupp7_TjuvOchPolis
                     Console.Clear();
                     Console.Write("\u001bc\x1b[3J"); //Helps clearing things drawn outside of frame. Removes artifacts 
 
+                    Stats.Time++;
                     city.UpdateMap();
                     prison.UpdateMap();
                     city.SendPrisonersToPrison(prison);
@@ -58,10 +59,12 @@ namespace Grupp7_TjuvOchPolis
                     else
                     {
                         city.PrintMap();
+                        //Msg.PrintLastToSide(5, 100, 25);
                         prison.PrintMap();
                         Msg.PrintLast(5);
+                        Stats.Print();
                     }
-                    Thread.Sleep(200);
+                    Thread.Sleep(400);
                 }
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 

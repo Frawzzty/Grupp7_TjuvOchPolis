@@ -22,13 +22,18 @@ namespace Grupp7_TjuvOchPolis
             citizen.Inventory.RemoveAt(rnd);
             this.Inventory.Add(stolenItem);
             this.IsWanted = true;
+            if (!citizen.Robbed)
+            {
+                Stats.TotalRobbed++;
+                citizen.Robbed = true;
+            }
             Msg.Add($"Thief {Name} stole {stolenItem.Type} from {citizen.Name}");
         }
 
         public void SittingInPrison() //tempnamn
         {
             TimeInPrison++;
-            if (TimeInPrison > 20) 
+            if (TimeInPrison > 50) 
             { 
                 TimeInPrison = 0;
                 InPrison = false;

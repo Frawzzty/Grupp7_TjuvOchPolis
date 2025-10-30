@@ -17,7 +17,8 @@ namespace Grupp7_TjuvOchPolis
             NumberOfArrests++;
             thief.InPrison = true;
             SeizeItems(thief);
-            Msg.Add($"Police {Name} arrested the thief {thief.Name}");          
+            Msg.Add($"Police {Name} arrested the thief {thief.Name}");
+            Stats.TotalArrests ++;
         }
         private void SeizeItems(Thief thief)
         {

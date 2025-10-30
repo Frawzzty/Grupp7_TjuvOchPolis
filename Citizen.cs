@@ -8,6 +8,7 @@ namespace Grupp7_TjuvOchPolis
 {
     internal class Citizen : Person
     {
+        public bool Robbed { get; set; } = false;
         public Citizen() : base()
         {
             Symbol = "C";

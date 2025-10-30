@@ -36,7 +36,7 @@ namespace Grupp7_TjuvOchPolis
         /// </summary>
         public virtual void UpdateMap()
         {
-            UpdateDirection(10);
+            UpdateDirection(3);
             UpdatePeoplePosition();
             ClearMap(); //Array.Clear(Map);
             foreach (Person personA in People)//placerar ut personer i map matris

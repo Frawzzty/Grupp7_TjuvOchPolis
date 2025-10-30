@@ -31,12 +31,33 @@ namespace Grupp7_TjuvOchPolis
             {
                 amount = messages.Count;
             }
-            Console.WriteLine("== NEWS FEED ===================================");          
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("== NEWS FEED ===================================");
+            Console.ResetColor();
+            for (int i = amount; i > 0; i--)
+            {             
+                Console.WriteLine(messages[messages.Count - i]);              
+            }
+            Console.WriteLine();
+        }
+        public static void PrintLastToSide(int amount, int mapWidth, int mapHeight)
+        {
+            mapWidth += 2;
+            if (messages.Count < amount)
+            {
+                amount = messages.Count;
+            }
+            Console.SetCursorPosition(mapWidth, 0);
+            Console.Write(" |== NEWS FEED ===================================");
             for (int i = amount; i > 0; i--)
             {
-                Console.WriteLine(messages[messages.Count - i]);          
+                Console.SetCursorPosition(mapWidth, amount - i +1);
+                Console.Write(" | " + messages[messages.Count - i]);
             }
-            Console.WriteLine("================================================");       
+            Console.SetCursorPosition(mapWidth, amount + 1);
+            Console.Write(" |================================================");
+            Console.SetCursorPosition(0, mapHeight + 2);
         }
 
         public static void Clear() //clears list
