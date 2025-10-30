@@ -25,5 +25,10 @@ namespace Grupp7_TjuvOchPolis
             thief.Inventory.Clear();
             Msg.Add($"Police {Name} Seized inventory of {thief.Name}");
         }
+
+        public override void PrintRoleDetails()
+        {
+            Console.Write($"Arrests: {NumberOfArrests}");          
+        }
     }
 }

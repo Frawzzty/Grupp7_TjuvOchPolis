@@ -34,46 +34,7 @@ namespace Grupp7_TjuvOchPolis
                 InPrison = false;
                 IsWanted = false;
             }
-        }
-
-        public override string Description()
-        {
-            string text = "";
-            text += this.GetType().Name.PadRight(8);
-            text += Name.PadRight(10);
-            text += $"X:{PosX} Y:{PosY}".PadRight(10);
-            text += $"dirX:{DirX} dirY:{DirY}".PadRight(16);
-            text += $"In Prison: {InPrison} ".PadLeft(16);
-            text += $"Is Wanted: {IsWanted} ".PadLeft(16);
-            text += $"TimeInPrison: {TimeInPrison} ".PadLeft(16);          
-            foreach (Item item in Inventory)
-            {
-                text += item.Type + ", ";
-            }
-            
-
-            return text;
-        }
-        //public override void WriteDescription()
-        //{
-        //    Console.ForegroundColor = Color;
-        //    Console.Write(this.GetType().Name.PadRight(8));
-        //    Console.ResetColor();
-        //    Console.Write(Name.PadRight(10));
-        //    Console.Write($"X:{PosX} ".PadRight(5));
-        //    Console.Write($"Y:{PosY}".PadRight(5));
-        //    Console.Write($"dirX:{DirX}".PadRight(8) + $"dirY:{DirY}".PadRight(8));
-        //    Console.Write($"In Prison: {InPrison} ".PadLeft(16));
-        //    Console.Write($"Is Wanted: {IsWanted} ".PadLeft(16));
-        //    Console.Write($"TimeInPrison: {TimeInPrison} ".PadLeft(16));
-
-        //    foreach (Item item in Inventory)
-        //    {
-        //        Console.Write(item.Type + ", ");
-        //    }
-        //    Console.WriteLine();
-
-        //}
+        }  
         public override void PrintRoleDetails()
         {
             

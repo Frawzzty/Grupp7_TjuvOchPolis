@@ -35,13 +35,13 @@ namespace Grupp7_TjuvOchPolis
 
                     if (debugMode)
                     {
-                        Console.WriteLine("Role".PadRight(8) + "Name".PadRight(10) + "Position".PadRight(10) + "Direcction".PadRight(16) + "Inventory"); //fixa
+                        Console.WriteLine("Role".PadRight(8) + "Name".PadRight(10) + "Position".PadRight(10) + "Direction".PadRight(16) + "Inventory".PadRight(30) + "Extra info"); //fixa
 
                         foreach (Person person in freePeople)
                         {
                             person.PrintDetails();
-                            person.PrintRoleDetails();
                             person.PrintInventory();
+                            person.PrintRoleDetails();
                             Console.WriteLine();
                         }
                         Console.WriteLine("----------------------------------");
@@ -49,8 +49,9 @@ namespace Grupp7_TjuvOchPolis
                         foreach (Person person in prisoners)
                         {
                             person.PrintDetails();
-                            person.PrintRoleDetails();
                             person.PrintInventory();
+                            person.PrintRoleDetails();
+                            
                             Console.WriteLine();
                         }
                     }

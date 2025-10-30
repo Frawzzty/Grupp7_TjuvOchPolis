@@ -85,19 +85,6 @@ namespace Grupp7_TjuvOchPolis
             PosY = (PosY + height) % height;
         }
 
-        public virtual string Description()
-        {
-            string text = "";          
-            text += this.GetType().Name.PadRight(8);
-            text += Name.PadRight(10);
-            text += $"X:{PosX} Y:{PosY}".PadRight(10);
-            text += $"dirX:{DirX} dirY:{DirY}".PadRight(16);
-            foreach (Item item in Inventory) 
-            {
-                text += item.Type + ", ";
-            }
-            return text;
-        }       
         public void PrintDetails()
         {
             Console.ForegroundColor = Color;
@@ -111,15 +98,17 @@ namespace Grupp7_TjuvOchPolis
         }
         public void PrintInventory() 
         {
-            Console.Write("[");
+            string text = "";
+            text += "[";
             for (int i = 0; i < Inventory.Count; i++)
             { 
-                if (Inventory.Count == i +1)
-                    Console.Write(Inventory[i].Type);
-                else
-                    Console.Write(Inventory[i].Type + ", ");
-            }
-            Console.Write("]");
+                if (Inventory.Count == i +1)                  
+                    text += Inventory[i].Type;
+                else                
+                    text += Inventory[i].Type + ", ";
+            }          
+            text += "]";
+            Console.Write(text.PadRight(30));
         }
         public virtual void PrintRoleDetails(){}
         private static string RandomName()
