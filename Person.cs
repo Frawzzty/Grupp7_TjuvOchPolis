@@ -97,7 +97,7 @@ namespace Grupp7_TjuvOchPolis
                 text += item.Type + ", ";
             }
             return text;
-        }
+        }       
         public void PrintDetails()
         {
             Console.ForegroundColor = Color;

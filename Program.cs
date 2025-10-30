@@ -35,7 +35,7 @@ namespace Grupp7_TjuvOchPolis
 
                     if (debugMode)
                     {
-                        Console.WriteLine("Profesion | Name | position | direcction | inventory |");
+                        Console.WriteLine("Role".PadRight(8) + "Name".PadRight(10) + "Position".PadRight(10) + "Direcction".PadRight(16) + "Inventory"); //fixa
 
                         foreach (Person person in freePeople)
                         {
