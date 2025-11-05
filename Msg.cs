@@ -6,26 +6,24 @@ using System.Threading.Tasks;
 
 namespace Grupp7_TjuvOchPolis
 {
-    public static class Msg //static class so you don't have to make a new object to add messages to
+    public static class Msg
     {
 
-        private static List<string> messages = new List<string>(); //a list to contain messages
-                                                                   //can change from list to stack
-
-        public static void Add(string msg) //this adds message to List
+        private static List<string> messages = new List<string>(); 
+        public static void Add(string msg) 
         {
             messages.Add(msg);
-            if (messages.Count > 25)
+            if (messages.Count > 25) //Empty last message when there are more than 25 messages
             { 
                 messages.RemoveAt(0);
             }
         }
-        public static void Print() //this prints the messages from List on their own lines
+        public static void Print() //Prints All the messages from List on their own lines
         {
             foreach (string m in messages) Console.WriteLine(m);          
         }
 
-        public static void PrintLast(int amount)
+        public static void PrintLast(int amount) //Prints the last [amount] messages, latest first.
         {
             if (messages.Count < amount)
             {
@@ -41,7 +39,7 @@ namespace Grupp7_TjuvOchPolis
             }
             Console.WriteLine();
         }
-        public static void PrintLastToSide(int amount, int mapWidth, int mapHeight)
+        public static void PrintLastToSide(int amount, int mapWidth, int mapHeight) 
         {
             mapWidth += 2;
             if (messages.Count < amount)
@@ -60,13 +58,9 @@ namespace Grupp7_TjuvOchPolis
             Console.SetCursorPosition(0, mapHeight + 2);
         }
 
-        public static void Clear() //clears list
+        public static void Clear()
         {         
             messages.Clear();
         }
-
-        ///This class would essentially act as a storage for messages and only prints it's content when the PrintBoarder() method is called upon 
-        ///so you can continually add debug messages throughout the code but still control the time when it outputs
-        ///so you write Msg.Add("a debug message")
     }
 }

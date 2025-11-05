@@ -50,8 +50,9 @@ namespace Grupp7_TjuvOchPolis
                     else
                     {
                         city.PrintMap();
+
                         //Msg.PrintLastToSide(5, 100, 25);
-                        prison.PrintMap();
+                        prison.PrintMap();                      
                         Msg.PrintLast(5);
                         Stats.Print();
                     }

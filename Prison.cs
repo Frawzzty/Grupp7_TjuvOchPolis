@@ -9,10 +9,7 @@ namespace Grupp7_TjuvOchPolis
     internal class Prison : Canvas
     {
 
-        public Prison(int width, int height, List<Person> people) : base(width, height, people)
-        {
-
-        }
+        public Prison(int width, int height, List<Person> people) : base(width, height, people) {}
 
         public void ReleasePrisoners(City city)
         {

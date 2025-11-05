@@ -8,10 +8,7 @@ namespace Grupp7_TjuvOchPolis
 {
     internal class City : Canvas
     {
-        public City(int width, int height, List<Person> people) : base(width, height, people)
-        {
-
-        }
+        public City(int width, int height, List<Person> people) : base(width, height, people) {}
         public override void UpdateMap()
         {
             UpdateDirection(DirectionMaxTick);
@@ -22,6 +19,8 @@ namespace Grupp7_TjuvOchPolis
             {
                 int x = personA.PosX;
                 int y = personA.PosY;
+
+                //Override adds this if statement
                 if (Map[y, x] != null) //Detected two people on the same position.
                 {
                     Person personB = Map[y, x]; //For clarity: Save other person to a variable.

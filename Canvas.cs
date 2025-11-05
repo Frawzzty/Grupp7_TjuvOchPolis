@@ -50,11 +50,10 @@ namespace Grupp7_TjuvOchPolis
         
         }      
 
-        public void PrintMap() //VIRTUAL OVERRIDE / CITY
+        public void PrintMap()
         {
             string place = GetType().Name.ToUpper();
-
-            // Console.WriteLine(GetType().Name);
+         
             Console.WriteLine($"╔══ {place} {new string('═', Width - place.Length - 4)}╗");
             for (int row = 0; row < Height; row++)
             {
@@ -77,12 +76,12 @@ namespace Grupp7_TjuvOchPolis
             }
             Console.WriteLine($"╚{new string('═', Width)}╝");
         }
-        public void SetRandomPosition() // sets random position
+        public void SetRandomPosition()
         {
             foreach (Person person in People)
             {
                 person.PosX = Random.Shared.Next(1, Width - 1);     // -1 because of index in Map from Canvas
-                person.PosY = Random.Shared.Next(1, Height - 1);    // -1 because of index in Map from Canvas
+                person.PosY = Random.Shared.Next(1, Height - 1);
             }
         }
 
@@ -94,10 +93,10 @@ namespace Grupp7_TjuvOchPolis
             }
         }
 
-        private int tick = 0;
+        private int tick = 0; //class variable so that UpdateDirection() can track time
         public void UpdateDirection(int tickMax)
         {
-            tick++; //Give new direction after five ticks
+            tick++; 
             if (tick == tickMax)
             {
                 tick = 0;
