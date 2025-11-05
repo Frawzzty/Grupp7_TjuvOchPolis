@@ -32,7 +32,15 @@ namespace Grupp7_TjuvOchPolis
                     prison.UpdateTimeInPrison();
                     prison.ReleasePrisoners(city);
 
-                    if (debugMode)
+                    if (!debugMode)
+                    {
+                        city.PrintMap();
+                        //Msg.PrintLastToSide(5, 100, 25);
+                        prison.PrintMap();
+                        Msg.PrintLast(5);
+                        Stats.Print();
+                    }
+                    else
                     {
                         Console.WriteLine("Role".PadRight(8) + "Name".PadRight(10) + "Position".PadRight(10) + "Direction".PadRight(16) + "Inventory".PadRight(30) + "Extra info");
 
@@ -46,15 +54,6 @@ namespace Grupp7_TjuvOchPolis
                         {
                             person.PrintInformation();
                         }
-                    }
-                    else
-                    {
-                        city.PrintMap();
-
-                        //Msg.PrintLastToSide(5, 100, 25);
-                        prison.PrintMap();                      
-                        Msg.PrintLast(5);
-                        Stats.Print();
                     }
                     Thread.Sleep(400);
                 }
