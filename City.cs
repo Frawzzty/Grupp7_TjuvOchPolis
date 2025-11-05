@@ -11,33 +11,31 @@ namespace Grupp7_TjuvOchPolis
         public City(int width, int height, List<Person> people) : base(width, height, people)
         {
 
-
         }
         public override void UpdateMap()
         {
+            UpdateDirection(DirectionMaxTick);
             UpdatePeoplePosition();
-            ClearMap(); //Array.Clear(Map);
+            ClearMap();
 
             foreach (Person personA in People)
             {
                 int x = personA.PosX;
                 int y = personA.PosY;
-                if (Map[y, x] != null) // Collision detected //Bug när fler kliver på varandra? Skippar en check
+                if (Map[y, x] != null) //Detected two people on the same position.
                 {
-                    Person personB = Map[y, x]; //Person som redan står på rutan
-                    HandleCollision(personA, personB); //beröm till patrik för variable namn
+                    Person personB = Map[y, x]; //For clarity: Save other person to a variable.
+                    HandleCollision(personA, personB);
                 }
 
                 Map[y, x] = personA;
-                //skulle kunna ha SetDirection() här
             }
         }
 
-        public void HandleCollision(Person personA, Person personB) //Keep?
-        {         
-            //Msg.Add($"{personA.GetType().Name} {personA.Name} walked into {personB.GetType().Name} {personB.Name}");
-
-            if (personA is Thief && personB is Citizen || personB is Thief && personA is Citizen) //Tjuv kolliderar med citizen
+        public void HandleCollision(Person personA, Person personB)
+        {
+            //Thief collides with Citizen
+            if (personA is Thief && personB is Citizen || personB is Thief && personA is Citizen) 
             {
                 Thief thief = personA is Thief ? (Thief)personA : (Thief)personB;
                 Citizen citizen = personA is Thief ? (Citizen)personB : (Citizen)personA;
@@ -46,16 +44,18 @@ namespace Grupp7_TjuvOchPolis
                     thief.StealItem(citizen);
             }
 
-            if (personA is Thief && personB is Police || personB is Thief && personA is Police) //Polis kolliderar med Tjuv 
+            //Police collides with Thief
+            if (personA is Thief && personB is Police || personB is Thief && personA is Police) 
             {
                 Thief thief = personA is Thief ? (Thief)personA : (Thief)personB;
                 Police police = personA is Thief ? (Police)personB : (Police)personA;
 
-                if (thief.IsWanted) police.Arrest(thief);
+                if (thief.IsWanted) 
+                    police.Arrest(thief);
             }
         }
 
-        public void SendPrisonersToPrison(Prison prison)
+        public void SendArrestedToPrison(Prison prison)
         {
             for(int i = 0; i < People.Count() - 1; i++)
             {

@@ -24,21 +24,21 @@ namespace Grupp7_TjuvOchPolis
             Name = RandomName();
             PosX = 0;
             PosY = 0;
-            SetDirection();
+            SetRandomDirection();
             Inventory = new List<Item>();
             Symbol = "X";
             Color = ConsoleColor.White;
         }
-        private static int RandomDirection()
+        private int GenerateRandomDirection()
         {
             int direction = Random.Shared.Next(-1, 2);
             return direction;
         }
 
-        public void SetDirection()
+        public void SetRandomDirection()
         {
-            DirX = RandomDirection();
-            DirY = RandomDirection();
+            DirX = GenerateRandomDirection();
+            DirY = GenerateRandomDirection();
 
             while (DirX == 0 && DirY == 0) // ReRoll if both
             {
@@ -48,8 +48,8 @@ namespace Grupp7_TjuvOchPolis
 
         private void ReRollDirection()
         {
-                DirX = RandomDirection();
-                DirY = RandomDirection();
+                DirX = GenerateRandomDirection();
+                DirY = GenerateRandomDirection();
         }
         public static List<Person> CreatePerson(int citizenCount, int policeCount, int theifCount)
         {
@@ -111,6 +111,14 @@ namespace Grupp7_TjuvOchPolis
             Console.Write(text.PadRight(30));
         }
         public virtual void PrintRoleDetails(){}
+
+        public void PrintInformation()
+        {
+            PrintDetails();
+            PrintInventory();
+            PrintRoleDetails();
+            Console.WriteLine();
+        }
         private static string RandomName()
         {
             string[] names =

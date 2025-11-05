@@ -10,7 +10,8 @@ namespace Grupp7_TjuvOchPolis
     {
         public Person[,] Map { get; set; }
         public int Height;
-        public int Width; 
+        public int Width;
+        public int DirectionMaxTick = 10;
         public List<Person> People { get; set; }
 
         public Canvas(int width, int height, List<Person> people)
@@ -31,15 +32,15 @@ namespace Grupp7_TjuvOchPolis
                 }
             }
         }
-        /// <summary>
-        /// Clears previous Data in matrix. Updares people positions. Checks collision. Place people in the matrix.
-        /// </summary>
+
         public virtual void UpdateMap()
         {
-            UpdateDirection(3);
+            UpdateDirection(DirectionMaxTick);
             UpdatePeoplePosition();
-            ClearMap(); //Array.Clear(Map);
-            foreach (Person personA in People)//placerar ut personer i map matris
+            ClearMap();
+
+            //Places each person on the matrix
+            foreach (Person personA in People)
             {
                 int x = personA.PosX;
                 int y = personA.PosY;
@@ -48,9 +49,7 @@ namespace Grupp7_TjuvOchPolis
             }
         
         }      
-        /// <summary>
-        /// Prints data in matrix.
-        /// </summary>
+
         public void PrintMap() //VIRTUAL OVERRIDE / CITY
         {
             string place = GetType().Name.ToUpper();
@@ -104,7 +103,7 @@ namespace Grupp7_TjuvOchPolis
                 tick = 0;
                 foreach (Person person in People)
                 {
-                    person.SetDirection();
+                    person.SetRandomDirection();
                 }
             }
         }

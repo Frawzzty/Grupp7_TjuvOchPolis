@@ -14,10 +14,8 @@ namespace Grupp7_TjuvOchPolis
 
             City city = new City(100, 25, freePeople);           
             Prison prison = new Prison(50, 10, prisoners);
-            bool debugMode = false;
-            int tick = 0;
 
-            Msg.Clear(); //Clear för så den inte skriver dubbelt
+            bool debugMode = false;
 
             while (true)
             {                
@@ -30,30 +28,23 @@ namespace Grupp7_TjuvOchPolis
                     Stats.Time++;
                     city.UpdateMap();
                     prison.UpdateMap();
-                    city.SendPrisonersToPrison(prison);
-                    prison.UpdatePrisonTime();
-                    prison.SendFreePrisonersToCity(city);
+                    city.SendArrestedToPrison(prison);
+                    prison.UpdateTimeInPrison();
+                    prison.ReleasePrisoners(city);
 
                     if (debugMode)
                     {
-                        Console.WriteLine("Role".PadRight(8) + "Name".PadRight(10) + "Position".PadRight(10) + "Direction".PadRight(16) + "Inventory".PadRight(30) + "Extra info"); //fixa
+                        Console.WriteLine("Role".PadRight(8) + "Name".PadRight(10) + "Position".PadRight(10) + "Direction".PadRight(16) + "Inventory".PadRight(30) + "Extra info");
 
                         foreach (Person person in freePeople)
                         {
-                            person.PrintDetails();
-                            person.PrintInventory();
-                            person.PrintRoleDetails();
-                            Console.WriteLine();
+                            person.PrintInformation();
                         }
                         Console.WriteLine("----------------------------------");
                         Console.WriteLine("PRISONERS IN PRISON:");
                         foreach (Person person in prisoners)
                         {
-                            person.PrintDetails();
-                            person.PrintInventory();
-                            person.PrintRoleDetails();
-                            
-                            Console.WriteLine();
+                            person.PrintInformation();
                         }
                     }
                     else

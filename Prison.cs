@@ -8,13 +8,13 @@ namespace Grupp7_TjuvOchPolis
 {
     internal class Prison : Canvas
     {
+
         public Prison(int width, int height, List<Person> people) : base(width, height, people)
         {
 
-
         }
 
-        public void SendFreePrisonersToCity(City city)
+        public void ReleasePrisoners(City city)
         {
             for (int i = 0; i < People.Count(); i++)
             {               
@@ -28,7 +28,7 @@ namespace Grupp7_TjuvOchPolis
             }
         }
 
-        public void UpdatePrisonTime()
+        public void UpdateTimeInPrison()
         {
             foreach (Person person in People)
             {
