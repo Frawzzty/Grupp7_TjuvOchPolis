@@ -33,7 +33,7 @@ namespace Grupp7_TjuvOchPolis
         public void SittingInPrison()
         {
             TimeInPrison++;
-            if (TimeInPrison > 50) 
+            if (TimeInPrison > 75) 
             { 
                 TimeInPrison = 0;
                 InPrison = false;

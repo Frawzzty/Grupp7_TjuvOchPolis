@@ -17,7 +17,7 @@ namespace Grupp7_TjuvOchPolis
             {               
                 if (((Thief)People[i]).InPrison == false)
                 {
-                    Msg.Add($"Freed {People[i].Name} from prison");
+                    Msg.Add($"Released {People[i].Name} from prison");
                
                     city.People.Add(People[i]);
                     People.Remove(People[i]);
