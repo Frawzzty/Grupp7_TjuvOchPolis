@@ -123,9 +123,9 @@ namespace Grupp7_TjuvOchPolis
         {
             string[] names =
             {
-                "Anna", "Erik", "Maria", "Johan", "Sara", "Anders", "Emma", "Lars", "Linda", "Per",
-                "Elin", "Karl", "Sofie", "Fredrik", "Ida", "Magnus", "Camilla", "Daniel", "Jessica", "Oskar",
-                "Malin", "Henrik", "Josefin", "Niklas", "Caroline", "Mattias", "Rebecca", "Patrik", "Helena", "Thomas"
+                "Anna", "Erik", "Maria", "Johan", "Sara", "Anders", "Emma", "Lars", "Alice", "Per",
+                "Elin", "Karl", "Sofie", "Fredrik", "Ida", "Mikael", "Camilla", "Daniel", "Jessica", "Oskar",
+                "Malin", "Henrik", "Josefin", "Niklas", "Caroline", "Alex", "Rebecca", "Patrik", "Helena", "Thomas"
             };
             return names[Random.Shared.Next(0, names.Length)];
         }

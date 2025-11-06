@@ -10,10 +10,10 @@ namespace Grupp7_TjuvOchPolis
 
             List<Person> freePeople = new List<Person>();
             List<Person> prisoners = new List<Person>();
-            freePeople = Person.CreatePerson(30, 10, 20);
+            freePeople = Person.CreatePerson(20, 10, 15);
 
-            City city = new City(100, 25, freePeople);           
-            Prison prison = new Prison(50, 10, prisoners);
+            City city = new City(100, 20, freePeople);           
+            Prison prison = new Prison(50, 5, prisoners);
 
             bool debugMode = false;
 
